@@ -1,22 +1,22 @@
 import sqlite3
-conn = None
-miCursor = None
 
 # Crea la conexion a la base de datos
 def abrirConn():
+    global conn
+    global miCursor
     conn = sqlite3.connect("myDB.db")
     miCursor = conn.cursor()
 
 # Crea las tablas si estas no existen
 def crearTablas():
-    miCursor.execute("CREATE TABLE IF NOT EXIST EMPLEADO (RUT Number,NombresApellidos VARCHAR2(70),num_Sexo NUMBER,direccion VARCHAR2(70),telefono VARCHAR2(12),num_Cargo NUMBER,fechaIngreso DATE,num_Contacto NUMBER);")
-    miCursor.execute("CREATE TABLE IF NOT EXIST CARGO (codCargo NUMBER,nombreCargo VARCHAR2(30),num_Departamento NUMBER);")
-    miCursor.execute("CREATE TABLE IF NOT EXIST DEPARTAMENTO (codDepartamento NUMBER,Nombre VARCHAR2(30),num_Area NUMBER);")
-    miCursor.execute("CREATE TABLE IF NOT EXIST AREA (codArea NUMBER,Nombre VARCHAR2(30));")
-    miCursor.execute("CREATE TABLE IF NOT EXIST SEXO (codSexo NUMBER,Nombre VARCHAR2(20));")
-    miCursor.execute("CREATE TABLE IF NOT EXIST CARGA_FAMILIAR (rut_carga NUMBER,NombresApellidos VARCHAR2(30),num_Empleado NUMBER,num_Relacion NUMBER,num_Sexo NUMBER);")
-    miCursor.execute("CREATE TABLE IF NOT EXIST RELACION (codRelacion NUMBER,Nombre VARCHAR2(20));")
-    miCursor.execute("CREATE TABLE IF NOT EXIST CONTACTO_EMERGENCIA (codContacto NUMBER,NombreApellido VARCHAR2(30),num_Relacion NUMBER,num_Sexo NUMBER,num_Empleado NUMBER,contacto VARCHAR2(30));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS EMPLEADO (RUT Number,NombresApellidos VARCHAR2(70),num_Sexo NUMBER,direccion VARCHAR2(70),telefono VARCHAR2(12),num_Cargo NUMBER,fechaIngreso DATE,num_Contacto NUMBER);")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS CARGO (codCargo NUMBER,nombreCargo VARCHAR2(30),num_Departamento NUMBER);")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS DEPARTAMENTO (codDepartamento NUMBER,Nombre VARCHAR2(30),num_Area NUMBER);")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS AREA (codArea NUMBER,Nombre VARCHAR2(30));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS SEXO (codSexo NUMBER,Nombre VARCHAR2(20));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS CARGA_FAMILIAR (rut_carga NUMBER,NombresApellidos VARCHAR2(30),num_Empleado NUMBER,num_Relacion NUMBER,num_Sexo NUMBER);")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS RELACION (codRelacion NUMBER,Nombre VARCHAR2(20));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS CONTACTO_EMERGENCIA (codContacto NUMBER,NombreApellido VARCHAR2(30),num_Relacion NUMBER,num_Sexo NUMBER,num_Empleado NUMBER,contacto VARCHAR2(30));")
 
 # Crea las PKs a las tablas
 def aplicarConstraintsPKs():

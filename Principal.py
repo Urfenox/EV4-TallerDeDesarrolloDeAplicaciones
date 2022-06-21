@@ -5,9 +5,10 @@ import sitioEmpleado
 import sitioJefe
 import sitioAdministrador
 
+# Limpiar la consola
 os.system("cls")
 
-# Conexion
+# Crear conexion
 sql_conn.abrirConn()
 # Crea las tablas
 sql_conn.crearTablas()
@@ -35,7 +36,7 @@ def menuPrincipal():
     return False
 
 # Ejecucion del menu
-def menuPrincipal():
+def iniciarMenu():
     while (menuPrincipal()):
         pass
-menuPrincipal()
+iniciarMenu()

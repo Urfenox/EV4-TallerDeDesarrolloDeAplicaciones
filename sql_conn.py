@@ -17,6 +17,7 @@ def crearTablas():
     miCursor.execute("CREATE TABLE IF NOT EXISTS CARGA_FAMILIAR (rut_carga NUMBER,NombresApellidos VARCHAR2(30),num_Empleado NUMBER,num_Relacion NUMBER,num_Sexo NUMBER);")
     miCursor.execute("CREATE TABLE IF NOT EXISTS RELACION (codRelacion NUMBER,Nombre VARCHAR2(20));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS CONTACTO_EMERGENCIA (codContacto NUMBER,NombreApellido VARCHAR2(30),num_Relacion NUMBER,num_Sexo NUMBER,num_Empleado NUMBER,contacto VARCHAR2(30));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS CREDENCIALES (codCredencial NUMBER,IDENT NUMBER,Usuario VARCHAR2(20),Clave VARCHAR2(70));")
 
 # Crea las PKs a las tablas
 def aplicarConstraintsPKs():
@@ -28,6 +29,7 @@ def aplicarConstraintsPKs():
     miCursor.execute("ALTER TABLE CARGA_FAMILIAR ADD CONSTRAINT PK_CARGA_FAMILIAR_rut_carga PRIMARY KEY (rut_carga);")
     miCursor.execute("ALTER TABLE RELACION ADD CONSTRAINT PK_RELACION_codRelacion PRIMARY KEY (codRelacion);")
     miCursor.execute("ALTER TABLE CONTACTO_EMERGENCIA ADD CONSTRAINT PK_CONTACTO_EMERGENCIA_codContacto PRIMARY KEY (codContacto);")
+    miCursor.execute("ALTER TABLE CREDENCIALES ADD CONSTRAINT PK_CREDENCIALES_codCredencial PRIMARY KEY (codCredencial);")
 
 # Crea las FKs a las tablas
 def aplicarConstraintsFKs():
@@ -42,4 +44,4 @@ def aplicarConstraintsFKs():
     miCursor.execute("ALTER TABLE CONTACTO_EMERGENCIA ADD CONSTRAINT FK_CONTACTO_EMERGENCIA_num_Relacion FOREIGN KEY (num_Relacion) REFERENCES RELACION(codRelacion);")
     miCursor.execute("ALTER TABLE CONTACTO_EMERGENCIA ADD CONSTRAINT FK_CONTACTO_EMERGENCIA_num_Sexo FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo);")
     miCursor.execute("ALTER TABLE CONTACTO_EMERGENCIA ADD CONSTRAINT FK_CONTACTO_EMERGENCIA_num_Empleado FOREIGN KEY (num_Empleado) REFERENCES EMPLEADO(rut);")
-
+    miCursor.execute("ALTER TABLE CREDENCIALES ADD CONSTRAINT FK_CREDENCIALES_num_Empleado FOREIGN KEY (IDENT) REFERENCES EMPLEADO(rut);")

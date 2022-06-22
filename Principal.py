@@ -10,8 +10,8 @@ os.system("cls")
 
 # Crear conexion
 sql_conn.abrirConn()
-# Crea las tablas
-sql_conn.crearTablas()
+# Iniciar Base de Datos
+sql_conn.iniciarDB()
 
 # Menu principal
 def menuPrincipal():

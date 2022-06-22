@@ -1,4 +1,5 @@
-import os, sql_conn
+import os
+import sql_conn
 
 # Este script se encarga de realiar las operaciones basicas CRUD para la tabla 'Empleado'.
 

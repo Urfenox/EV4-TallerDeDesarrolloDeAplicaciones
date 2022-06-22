@@ -1,3 +1,4 @@
+import os
 import sqlite3
 
 # Crea la conexion a la base de datos
@@ -6,6 +7,13 @@ def abrirConn():
     global miCursor
     conn = sqlite3.connect("myDB.db")
     miCursor = conn.cursor()
+
+# Inicializa la Base de Datos
+def iniciarDB():
+    if (os.path.exists('myDB.db') == False): # Si el archivo myDB.db no existe...
+        crearTablas()
+        aplicarConstraintsPKs()
+        aplicarConstraintsFKs
 
 # Crea las tablas si estas no existen
 def crearTablas():

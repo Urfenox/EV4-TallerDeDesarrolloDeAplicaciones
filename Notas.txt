@@ -1,0 +1,12 @@
+
+Principal.py es el programa principal.
+
+Es logico que la base de datos esta vacia en cuanto a sus tablas. Entonces, se podria generar una instancia en la que el programa
+deba ser configurado. Por ejemplo: Cuando se inicia por primera vez, se deben ingresar los Sexos, Cargos, Areas, Depatamentos, etc. Todo dato que luego deba ser usado.
+Ya que, si no existen, no se podra agregar a un empleado.
+
+La credencial de Administrador se genera antes de la publicacion del programa. Viene incorporada, no se puede cambiar.
+    La credencial de RRHH tambien.
+La credencial del Empleado se genera cuando este es agregado a la base de datos. El usuario de RRHH que ingreso el empleado tendra que
+avisarle al empleado cual sera su clave de acceso.
+

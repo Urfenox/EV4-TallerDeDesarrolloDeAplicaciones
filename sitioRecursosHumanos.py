@@ -1,5 +1,6 @@
 import os
 import sql_conn
+import CRUD_Empleados
 
 os.system("cls")
 
@@ -19,7 +20,7 @@ def agregarEmpleados():
     # Para seleccionar un contacto, este debera estar creado.
     #   Se debe crear un contacto. Aqui mismo.
     #   Tambien se deberan agregar las cargas familiares. Aqui mismo.
-    #  Contacto = ""
+    Contacto = ""
     # OJO: Si algun dato se ingresa mal y el programa se muere, los datos deberan ser ingresados otra vez.
     #   Esto resultara en algo terriblemente horrible para el usuario, quiza crear un .txt con los datos temporalmente, luego revisar si hay algun Empleado que haya quedado guardado.
     #   Si es asi, entonces se cargan los datos y se continua desde donde lo dejo. (Opcional)
@@ -27,6 +28,7 @@ def agregarEmpleados():
     # ...
     # [Al finalizar] Se debera generar una contraseña para que luego el empleado pueda acceder a su 'perfil'.
     #   Esta clave debe guardarse en md5 en la tabla 'Credenciales'
+    # CRUD_Empleados.Agregar(RUT, Nombre, Sexo, Direccion, Telefono, Cargo, FechaIngreso, Contacto)
 
 def buscarEmpleados():
     print("No disponible")
@@ -37,7 +39,7 @@ def eliminarEmpleados():
 def modificarEmpleados():
     print("No disponible")
 
-def RecursosHumanos():
+def menuPrincipal():
     repetir = True
     print("\n --- Bienvenido a 'Recursos Humanos' ---")
     print("1. Listar Empleados")
@@ -61,7 +63,35 @@ def RecursosHumanos():
         repetir = False
     return False
 
-# Ejecucion del menu
+# Ejecucion del menu principal (solo accesible desde inicioSesion())
+def iniciarMenu():
+    while (menuPrincipal()):
+        pass
+
+def inicioSesion():
+    clave = input("Ingrese Clave: ")
+    # Buscar y verificar. bla bla
+    # La credencial de RecursosHumanos se genera en el desarrollo. Como contraseña de fabrica
+    iniciarMenu()
+    
+# Ejecucion del menu de inicio de sesion (solo accesible desde RecursosHumanos())
+def menuInicioSesion():
+    while (inicioSesion()):
+        pass
+
+def RecursosHumanos():
+    repetir = True
+    print("\n --- Bienvenido a 'Recursos Humanos' ---")
+    print("1. Iniciar Sesion")
+    print("2. Salir")
+    op = int(input())
+    if op == 1:
+        menuInicioSesion()
+    if op == 2:
+        repetir = False
+    return False
+
+# Ejecucion del menu inicial (accesible solo por llamada externa)
 def menuRecursosHumanos():
     while (RecursosHumanos()):
         pass

@@ -1,3 +1,91 @@
+/*
+
+SQLite
+
+*/
+
+-- TABLAS
+CREATE TABLE IF NOT EXISTS EMPLEADO (
+    rut NUMBER PRIMARY KEY,
+    NombreApellidos VARCHAR2(70),
+    num_Sexo NUMBER,
+    direccion VARCHAR2(70),
+    telefono VARCHAR2(12),
+    num_Cargo NUMBER,
+    fechaIngreso DATE,
+    num_Contacto NUMBER,
+    FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo)
+);
+
+CREATE TABLE IF NOT EXISTS CARGO (
+    codCargo NUMBER PRIMARY KEY,
+    nombreCargo VARCHAR2(30),
+    num_Departamento NUMBER,
+    FOREIGN KEY (num_Departamento) REFERENCES DEPARTAMENTO(codDepartamento)
+);
+
+CREATE TABLE IF NOT EXISTS DEPARTAMENTO (
+    codDepartamento NUMBER PRIMARY KEY,
+    Nombre VARCHAR2(30),
+    num_Area NUMBER,
+    FOREIGN KEY (num_Area) REFERENCES AREA(codArea)
+);
+
+CREATE TABLE IF NOT EXISTS AREA (
+    codArea NUMBER PRIMARY KEY,
+    Nombre VARCHAR2(30)
+);
+
+CREATE TABLE IF NOT EXISTS SEXO (
+    codSexo NUMBER PRIMARY KEY,
+    Nombre VARCHAR2(20)
+);
+
+CREATE TABLE IF NOT EXISTS CARGA_FAMILIAR (
+    rut_carga NUMBER PRIMARY KEY,
+    NombresApellidos VARCHAR2(30),
+    num_Empleado NUMBER,
+    num_Relacion NUMBER,
+    num_Sexo NUMBER,
+    FOREIGN KEY (num_Empleado) REFERENCES EMPLEADO(rut),
+    FOREIGN KEY (num_Relacion) REFERENCES RELACION(codRelacion),
+    FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo)
+);
+
+CREATE TABLE IF NOT EXISTS RELACION (
+    codRelacion NUMBER PRIMARY KEY,
+    Nombre VARCHAR2(20)
+);
+
+CREATE TABLE IF NOT EXISTS CONTACTO_EMERGENCIA (
+    codContacto NUMBER PRIMARY KEY,
+    NombreApellido VARCHAR2(30),
+    num_Relacion NUMBER,
+    num_Sexo NUMBER,
+    num_Empleado NUMBER,
+    contacto VARCHAR2(30),
+    FOREIGN KEY (num_Relacion) REFERENCES RELACION(codRelacion),
+    FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo),
+    FOREIGN KEY (num_Empleado) REFERENCES EMPLEADO(rut)
+);
+
+CREATE TABLE IF NOT EXISTS CREDENCIALES (
+    codCredencial NUMBER PRIMARY KEY,
+    IDENT NUMBER,
+    Usuario VARCHAR2(20),
+    Clave VARCHAR2(70)
+);
+
+
+
+
+
+/*
+
+SQL Puro
+
+*/
+
 -- TABLAS
 CREATE TABLE IF NOT EXISTS EMPLEADO (
     RUT Number,

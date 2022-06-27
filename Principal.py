@@ -1,5 +1,6 @@
 import os
 import sql_conn
+import configurador
 import sitioRecursosHumanos
 import sitioEmpleado
 import sitioJefe
@@ -7,11 +8,6 @@ import sitioAdministrador
 
 # Limpiar la consola
 os.system("cls")
-
-# Crear conexion
-sql_conn.abrirConn()
-# Iniciar Base de Datos
-sql_conn.iniciarDB()
 
 # Menu principal
 def menuPrincipal():
@@ -39,4 +35,9 @@ def menuPrincipal():
 def iniciarMenu():
     while (menuPrincipal()):
         pass
-iniciarMenu()
+
+def Principal():
+    configurador.iniciador()
+    iniciarMenu()
+
+Principal()

@@ -7,13 +7,13 @@ Definiciones
 Puede instalar, usar, acceder, ejecutar o interactuar ("Ejecutar") una copia del SOFTWARE en una o varias computadoras. El SOFTWARE puede instalarse, accederse, mostrarse, ejecutarse, compartirse o usarse simultáneamente en o desde diferentes computadoras. Estos derechos son aplicables para el uso personal y comercial del SOFTWARE.
 
 2. Sin daños consecuentes o de otro tipo
-En la medida máxima permitida por la ley aplicable, el autor (%autor%) no será responsable de ningún otro daño (incluidos, entre otros, daños por pérdida de ganancias comerciales, interrupción comercial, pérdida de información comercial u otra pérdida pecuniaria). ) que surjan del uso o la imposibilidad de usar el SOFTWARE) incluso si el autor ha sido advertido de la posibilidad de tales daños. En la medida en que podría haber evitado los daños tomando las precauciones razonables, incluida la copia de seguridad de su software y otros archivos, el autor y sus proveedores no serán responsables de dichos daños.
+En la medida máxima permitida por la ley aplicable, el autor no será responsable de ningún otro daño (incluidos, entre otros, daños por pérdida de ganancias comerciales, interrupción comercial, pérdida de información comercial u otra pérdida pecuniaria). ) que surjan del uso o la imposibilidad de usar el SOFTWARE) incluso si el autor ha sido advertido de la posibilidad de tales daños. En la medida en que podría haber evitado los daños tomando las precauciones razonables, incluida la copia de seguridad de su software y otros archivos, el autor y sus proveedores no serán responsables de dichos daños.
 
 3. Ingeniería inversa, descompilación y desmontaje
 No puede aplicar ingeniería inversa, descompilar o desensamblar el SOFTWARE.
 
 4. Derechos de autor
-Todos los títulos y derechos de propiedad intelectual del SOFTWARE son propiedad del autor (%autor%).
+Todos los títulos y derechos de propiedad intelectual del SOFTWARE son propiedad del autor.
 
 5. Separación de componentes
 El SOFTWARE se licencia como un solo producto y sus componentes no pueden separarse.

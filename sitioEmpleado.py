@@ -1,11 +1,11 @@
 import os
 import sql_conn
-
-os.system("cls")
+import Utilidades
 
 
 
 def menuPrincipal():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido 'Empleado' ---")
     print("1. Modificar Datos Personales")
@@ -31,8 +31,8 @@ def iniciarMenu():
 def inicioSesion():
     rut = input("Ingrese su RUT: ")
     clave = input("Ingrese su Clave: ")
-    # Buscar RUT y verificar clave con la tabla Credenciales
-    # Recordando que al empleado se le genera un registro en la tabla Credenciales cuando un RRHH agrega al Empleado
+    # Buscar RUT y verificar clave con la tabla 'Credencial'
+    # Recordando que al empleado se le genera un registro en la tabla 'Credencial' cuando un RRHH agrega al Empleado
     # se genera su clave en ese proceso.
     iniciarMenu()
 
@@ -42,6 +42,7 @@ def menuInicioSesion():
         pass
 
 def Empleado():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido 'Empleado' ---")
     print("1. Iniciar sesion")

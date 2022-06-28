@@ -1,11 +1,11 @@
 import os
 import sql_conn
-
-os.system("cls")
+import Utilidades
 
 
 
 def menuPrincipal():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido 'Jefe' ---")
     print("1. No disponible")
@@ -35,6 +35,7 @@ def menuInicioSesion():
         pass
 
 def Jefe():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido 'Jefe' ---")
     print("1. Iniciar sesion")

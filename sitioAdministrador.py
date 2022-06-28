@@ -1,16 +1,17 @@
 import os
 import sql_conn
 import CRUD_Administrador
+import Utilidades
 
-os.system("cls")
+
 
 def iniciarSesion():
-    clave = input("Ingrese Clave: ")
-    # Buscar y verificar. bla bla
-    # La credencial del administrador se genera en el desarrollo. Como contraseña de fabrica
-    CRUD_Administrador.iniciarMenu()
+    clave = input("Ingrese Clave de Administrador: ")
+    if (clave == Utilidades.claveAdmin):
+        CRUD_Administrador.iniciarMenu()
 
 def Administrador():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido 'Administrador' ---")
     print("1. Iniciar sesion")

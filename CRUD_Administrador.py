@@ -2,11 +2,12 @@ import os
 import sql_conn
 import CRUD_Empleados
 
-# Este script realiza todas las operaciones CRUD en todas las tablas.
+strAdministracion = "Administracion"
+strAdministrador = "Administrador"
 
 def menuPrincipal():
     repetir = True
-    print("\n --- Bienvenido al 'Sistema de Administracion' ---")
+    print("\n --- Bienvenido al 'Sistema de {}' ---".format(strAdministrador))
     print("1. CRUD Empleado")
     print("2. CRUD Cargo")
     print("3. CRUD Departamento")

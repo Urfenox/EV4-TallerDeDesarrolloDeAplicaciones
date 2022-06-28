@@ -1,8 +1,9 @@
 import os
 import sql_conn
 import CRUD_Empleados
+import Utilidades
 
-os.system("cls")
+
 
 def listarEmpleados():
     print("No disponible")
@@ -40,6 +41,7 @@ def modificarEmpleados():
     print("No disponible")
 
 def menuPrincipal():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido a 'Recursos Humanos' ---")
     print("1. Listar Empleados")
@@ -69,10 +71,9 @@ def iniciarMenu():
         pass
 
 def inicioSesion():
-    clave = input("Ingrese Clave: ")
-    # Buscar y verificar. bla bla
-    # La credencial de RecursosHumanos se genera en el desarrollo. Como contraseña de fabrica
-    iniciarMenu()
+    clave = input("Ingrese Clave de Recursos Humanos: ")
+    if (clave == Utilidades.claveRRHH):
+        iniciarMenu()
     
 # Ejecucion del menu de inicio de sesion (solo accesible desde RecursosHumanos())
 def menuInicioSesion():
@@ -80,6 +81,7 @@ def menuInicioSesion():
         pass
 
 def RecursosHumanos():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido a 'Recursos Humanos' ---")
     print("1. Iniciar Sesion")

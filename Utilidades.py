@@ -1,8 +1,15 @@
 import os
+import random
+import string
 import sql_conn
 import Utilidades
 
 
+
+def generarStringAleatorio(longitud):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(longitud))
+    return result_str
 
 def _eliminarDDB():
     # NO llamar esta funcion JAMAS.

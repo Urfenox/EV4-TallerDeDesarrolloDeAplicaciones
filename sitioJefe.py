@@ -1,4 +1,5 @@
 import Utilidades
+import CRUD_Credenciales
 
 
 
@@ -23,9 +24,10 @@ def iniciarMenu():
 def inicioSesion():
     rut = input("Ingrese su RUT: ")
     clave = input("Ingrese su Clave: ")
-    # Buscar RUT y verificar clave con la tabla Credenciales
-    # La credencial del administrador se genera en el desarrollo. Como contraseña de fabrica
-    iniciarMenu()
+    if (CRUD_Credenciales.VerificarCredencial(rut, clave) == True):
+        iniciarMenu()
+    else:
+        print("Credenciales incorrectas.")
 
 # Ejecucion del menu de inicio de sesion (solo accesible desde Jefe())
 def menuInicioSesion():

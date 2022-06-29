@@ -1,4 +1,5 @@
 import Utilidades
+import CRUD_Credenciales
 
 
 
@@ -29,10 +30,10 @@ def iniciarMenu():
 def inicioSesion():
     rut = input("Ingrese su RUT: ")
     clave = input("Ingrese su Clave: ")
-    # Buscar RUT y verificar clave con la tabla 'Credencial'
-    # Recordando que al empleado se le genera un registro en la tabla 'Credencial' cuando un RRHH agrega al Empleado
-    # se genera su clave en ese proceso.
-    iniciarMenu()
+    if (CRUD_Credenciales.VerificarCredencial(rut, clave) == True):
+        iniciarMenu()
+    else:
+        print("Credenciales incorrectas.")
 
 # Ejecucion del menu de inicio de sesion (solo accesible desde Empleado())
 def menuInicioSesion():

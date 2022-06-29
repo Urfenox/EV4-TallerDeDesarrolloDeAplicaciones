@@ -4,6 +4,7 @@ import CRUD_Cargo
 import CRUD_Sexo
 import CRUD_ContactoEmergencia
 import CRUD_CargaFamiliar
+import CRUD_Credenciales
 
 strPluralMin = "Empleados"
 strSingularMin = "Empleado"
@@ -12,14 +13,17 @@ strNombreTabla = "EMPLEADO"
 def Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso):
     sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?, ?, ?, ?);".format(strNombreTabla), (RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso))
     print("\n {} '{}: {}' agregado \n".format(strSingularMin, RUT, NombresApelidos))
+    sql_conn.conn.commit()
 
 def Modificar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso):
     sql_conn.miCursor.execute("UPDATE {} SET NombreApellidos=?, num_Sexo=?, direccion=?, telefono=?, num_Cargo=?, fechaIngreso=? WHERE rut=?;".format(strNombreTabla), (NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso, RUT))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, RUT, NombresApelidos))
+    sql_conn.conn.commit()
 
 def Eliminar(RUT):
     sql_conn.miCursor.execute("DELETE FROM {} WHERE rut=?;".format(strNombreTabla), (RUT)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, RUT))
+    sql_conn.conn.commit()
 
 def Obtener(PK=NULL):
     # Obtener lista todos los datos
@@ -74,7 +78,7 @@ def Crear(): # Agrega un registro. Pide los datos
         else:
             continuar = False
     # [Al finalizar] Se debera generar una contraseña para que luego el empleado pueda acceder a su 'perfil'.
-    #   Esta clave debe guardarse en md5 en la tabla 'Credenciales'
+    print(CRUD_Credenciales.AgregarCredencialAuto(RUT, NombresApelidos[:20]))
     Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso)
 
 def Explorar(): # Obtener un registro. Pide PK

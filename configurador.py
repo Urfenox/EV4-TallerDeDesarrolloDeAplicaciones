@@ -20,6 +20,11 @@ def iniciador():
         # Iniciar Base de Datos
         sql_conn.iniciarDB()
         primerInicio()
+    else:
+        # Crear conexion
+        sql_conn.abrirConn()
+        # Iniciar Base de Datos
+        sql_conn.iniciarDB()
 
 def mostrarEULA():
     Utilidades.limpiarConsola()

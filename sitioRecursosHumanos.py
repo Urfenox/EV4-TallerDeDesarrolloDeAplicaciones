@@ -19,7 +19,7 @@ def menuPrincipal():
     if op == 2:
         CRUD_Empleados.Crear()
     if op == 3:
-        CRUD_Empleados.Explorar()
+        CRUD_Empleados.Obtener((int(input("Ingrese el RUT del Empleado: "))))
     if op == 4:
         CRUD_Empleados.Remover()
     if op == 5:

@@ -18,10 +18,12 @@ def Agregar(Nombre, num_Area):
 def Modificar(codDepartamento, Nombre):
     sql_conn.miCursor.execute("UPDATE {} SET Nombre=? WHERE codDepartamento=?;".format(strNombreTabla), (Nombre, codDepartamento))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, codDepartamento, Nombre))
+    sql_conn.conn.commit()
 
 def Eliminar(codDepartamento):
     sql_conn.miCursor.execute("DELETE FROM {} WHERE codDepartamento=?;".format(strNombreTabla), (codDepartamento)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, codDepartamento))
+    sql_conn.conn.commit()
 
 def Obtener(PK=NULL):
     # Obtener lista todos los datos
@@ -50,7 +52,7 @@ def Obtener(PK=NULL):
 #   D = Remover()
 
 def Crear(): # Agrega un registro. Pide los datos
-    Nombre = input("Ingrese el nombre del Area: ")
+    Nombre = input("Ingrese el nombre del Departamento: ")
     CRUD_Area.Obtener()
     num_Area = int(input("Ingrese el Codigo del Area: "))
     Agregar(Nombre, num_Area)

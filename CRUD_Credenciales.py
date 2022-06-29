@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 import sql_conn
+import Utilidades
 
 strPluralMin = "Credenciales"
 strSingularMin = "Credencial"
@@ -17,10 +18,12 @@ def Agregar(IDENT, Usuario, Clave):
 def Modificar(codCredencial, Nombre, Clave):
     sql_conn.miCursor.execute("UPDATE {} SET Usuario=?, Clave=? WHERE codCredencial=?;".format(strNombreTabla), (Nombre, Clave, codCredencial))
     print("\n {} '{}: {}: {}' modificada \n".format(strSingularMin, codCredencial, Nombre, Clave))
+    sql_conn.conn.commit()
 
 def Eliminar(codCredencial):
     sql_conn.miCursor.execute("DELETE FROM {} WHERE codCredencial=?;".format(strNombreTabla), (codCredencial)) 
     print("\n {} '{}' eliminada \n".format(strSingularMin, codCredencial))
+    sql_conn.conn.commit()
 
 def Obtener(PK=NULL):
     # Obtener lista todos los datos
@@ -74,3 +77,24 @@ def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
 
 def Remover(): # Eliminar un registro. Pide PK
     Eliminar(int(input("Ingrese el Codigo de la Credencial: ")))
+
+# Usos
+
+def VerificarCredencial(Rut, Clave):
+    # consulta
+    sql_conn.miCursor.execute("SELECT * FROM {} WHERE IDENT=? AND Clave=?".format(strNombreTabla), (Rut, Clave))
+    consulta = sql_conn.miCursor.fetchall()
+    # verificacion
+    if (len(consulta) == 0):
+        return False
+    else:
+        for item in consulta:
+            # verificacion
+            if ((item[1] == int(Rut)) and (item[3] == Clave)):
+                # devolver
+                return True
+
+def AgregarCredencialAuto(IDENT, Usuario):
+    Clave = Utilidades.generarStringAleatorio(6)
+    Agregar(IDENT, Usuario, Clave)
+    return "Credencial para '{}' Clave: {}".format(IDENT, Clave)

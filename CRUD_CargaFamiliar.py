@@ -20,10 +20,12 @@ def Agregar(rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo):
 def Modificar(rut_carga, Nombre):
     sql_conn.miCursor.execute("UPDATE {} SET NombresApellidos=? WHERE rut_carga=?;".format(strNombreTabla), (Nombre, rut_carga))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, rut_carga, Nombre))
+    sql_conn.conn.commit()
 
 def Eliminar(rut_carga):
     sql_conn.miCursor.execute("DELETE FROM {} WHERE rut_carga=?;".format(strNombreTabla), (rut_carga)) 
     print("\n {} '{}' eliminada \n".format(strSingularMin, rut_carga))
+    sql_conn.conn.commit()
 
 def Obtener(PK=NULL):
     # Obtener lista todos los datos

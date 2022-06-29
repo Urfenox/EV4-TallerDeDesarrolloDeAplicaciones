@@ -18,10 +18,12 @@ def Agregar(Nombre, num_Departamento):
 def Modificar(codCargo, Nombre):
     sql_conn.miCursor.execute("UPDATE {} SET nombreCargo=? WHERE codCargo=?;".format(strNombreTabla), (Nombre, codCargo))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, codCargo, Nombre))
+    sql_conn.conn.commit()
 
 def Eliminar(codCargo):
     sql_conn.miCursor.execute("DELETE FROM {} WHERE codCargo=?;".format(strNombreTabla), (codCargo)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, codCargo))
+    sql_conn.conn.commit()
 
 def Obtener(PK=NULL):
     # Obtener lista todos los datos

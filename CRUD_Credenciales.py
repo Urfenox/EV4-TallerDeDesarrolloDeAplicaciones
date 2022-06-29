@@ -7,19 +7,19 @@ strNombreTabla = "CREDENCIAL"
 
 def Agregar(IDENT, Usuario, Clave):
     # verificar en que codigo van
-    sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+    sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
     contenido = sql_conn.miCursor.fetchall()
     contadorActual = len(contenido)
-    sql_conn.miCursor.execute("INSERT INTO ? VALUES (?, ?, ?, ?);", (strNombreTabla, contadorActual, IDENT, Usuario, Clave))
+    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?);".format(strNombreTabla), (contadorActual, IDENT, Usuario, Clave))
     print("\n {} '{}: {}: {}' agregada \n".format(strSingularMin, contadorActual, IDENT, Usuario))
     sql_conn.conn.commit()
 
 def Modificar(codCredencial, Nombre, Clave):
-    sql_conn.miCursor.execute("UPDATE ? SET Usuario=?, Clave=? WHERE codCredencial=?;", (strNombreTabla, Nombre, Clave, codCredencial))
+    sql_conn.miCursor.execute("UPDATE {} SET Usuario=?, Clave=? WHERE codCredencial=?;".format(strNombreTabla), (Nombre, Clave, codCredencial))
     print("\n {} '{}: {}: {}' modificada \n".format(strSingularMin, codCredencial, Nombre, Clave))
 
 def Eliminar(codCredencial):
-    sql_conn.miCursor.execute("DELETE FROM ? WHERE codCredencial=?;", (strNombreTabla, codCredencial)) 
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE codCredencial=?;".format(strNombreTabla), (codCredencial)) 
     print("\n {} '{}' eliminada \n".format(strSingularMin, codCredencial))
 
 def Obtener(PK=NULL):
@@ -29,7 +29,7 @@ def Obtener(PK=NULL):
     #       Obtener(Parametro=PK): Muestra el registro coincidente con la PK.
     if (PK == NULL):
         # Opcion 1: Buscar y mostrar todos
-        sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+        sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
         items = sql_conn.miCursor.fetchall()
         print("--- Inicio registros '{}' ---".format(strSingularMin))
         for item in items:
@@ -37,7 +37,7 @@ def Obtener(PK=NULL):
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM ? WHERE codCredencial=?;", (strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codCredencial=?;".format(strNombreTabla), (PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    Codigo: {}\n    IDENT: {}\n    Usuario: {}\n    Clave: {}\n".format(item[0], item[1], item[2], item[3]))
@@ -49,7 +49,10 @@ def Obtener(PK=NULL):
 #   D = Remover
 
 def Crear(): # Agrega un registro. Pide los datos
-    Agregar(int(input("Ingrese el vinculo IDENT: ")), input("Ingrese el Usuario: "), input("Ingrese la Clave: "))
+    IDENT = int(input("Ingrese el vinculo IDENT: "))
+    Usuario = input("Ingrese el Usuario: ")
+    Clave = input("Ingrese la Clave: ")
+    Agregar(IDENT, Usuario, Clave)
 
 def Explorar(): # Obtener un registro. Pide PK
     print("Hay dos Opciones para esta funcion:\n    1. Listar todos\n    2. Buscar uno")

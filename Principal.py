@@ -1,16 +1,15 @@
-import os
-import sql_conn
 import configurador
+import Utilidades
 import sitioRecursosHumanos
 import sitioEmpleado
 import sitioJefe
 import sitioAdministrador
 
-# Limpiar la consola
-os.system("cls")
+Utilidades.limpiarConsola()
 
 # Menu principal
 def menuPrincipal():
+    Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido al 'Listado de Usuarios' ---")
     print("1. Soy Recursos Humanos")
@@ -18,7 +17,7 @@ def menuPrincipal():
     print("3. Soy Jefe")
     print("4. Soy Administrador")
     print("5. Salir")
-    op = int(input())
+    op = int(input("Ingrese una opcion: "))
     if op == 1:
         sitioRecursosHumanos.menuRecursosHumanos()
     if op == 2:

@@ -9,7 +9,7 @@ import CRUD_Cargo
 import CRUD_Sexo
 import CRUD_Relacion
 
-
+# 29/06/2022 03:36 PM. Funciona.
 
 # Solo se llama al iniciar el programa
 def iniciador():
@@ -92,6 +92,11 @@ def AñadirDatosIniciales():
 # Esta funcion solo se llama cuando el programa es iniciado por primera vez.
 def primerInicio():
     Utilidades.limpiarConsola()
+    print("\n¡Bienvenido a myEmployeerArray Software!\n")
+    time.sleep(2)
+    print("Por favor espere...")
+    time.sleep(5)
+    Utilidades.limpiarConsola()
     print("Este es el primer inicio de este programa.")
     print("En esta etapa:")
     print("    - Ingresara datos basicos para el funcionamiento de la Base de Datos.")
@@ -106,6 +111,9 @@ def primerInicio():
         #   Asi la proxima puede volver a configurar.
         sys.exit() # Cierra el programa.
     else:
+        Utilidades.limpiarConsola()
+        print("\n¡Gracias por leer y aceptar nuestro EULA!\n")
+        time.sleep(3)
         Utilidades.limpiarConsola()
         print("Este programa debe ser configurado por ser la primera vez que inicia.")
         time.sleep(4)

@@ -10,15 +10,15 @@ strSingularMin = "Empleado"
 strNombreTabla = "EMPLEADO"
 
 def Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso):
-    sql_conn.miCursor.execute("INSERT INTO ? VALUES (?, ?, ?, ?, ?, ?, ?);", (strNombreTabla, RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso))
+    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?, ?, ?, ?);".format(strNombreTabla), (RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso))
     print("\n {} '{}: {}' agregado \n".format(strSingularMin, RUT, NombresApelidos))
 
 def Modificar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso):
-    sql_conn.miCursor.execute("UPDATE ? SET NombreApellidos=?, num_Sexo=?, direccion=?, telefono=?, num_Cargo=?, fechaIngreso=? WHERE rut=?;", (strNombreTabla, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso, RUT))
+    sql_conn.miCursor.execute("UPDATE {} SET NombreApellidos=?, num_Sexo=?, direccion=?, telefono=?, num_Cargo=?, fechaIngreso=? WHERE rut=?;".format(strNombreTabla), (NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso, RUT))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, RUT, NombresApelidos))
 
 def Eliminar(RUT):
-    sql_conn.miCursor.execute("DELETE FROM ? WHERE rut=?;", (strNombreTabla, RUT)) 
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE rut=?;".format(strNombreTabla), (RUT)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, RUT))
 
 def Obtener(PK=NULL):
@@ -28,18 +28,18 @@ def Obtener(PK=NULL):
     #       Obtener(Parametro=PK): Muestra el registro coincidente con la PK.
     if (PK == NULL):
         # Opcion 1: Buscar y mostrar todos
-        sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+        sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
         items = sql_conn.miCursor.fetchall()
         print("--- Inicio registros '{}' ---".format(strSingularMin))
         for item in items:
-            print("\n    RUT: {}\n    NombreApellidos: {}\n    Sexo: {}\n    Direccion: {}\n    Telefono: {}\n    Cargo: {}\n    Fecha Ingreso: {}\n".format(item[0], item[1], item[2], item[3], item[4], item[5], item[6]))
+            print("\n    RUT: {}\n    Nombre: {}\n    Sexo: {}\n    Direccion: {}\n    Telefono: {}\n    Cargo: {}\n    Fecha Ingreso: {}\n".format(item[0], item[1], item[2], item[3], item[4], item[5], item[6]))
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM ? WHERE rut=?;", (strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE rut=?;".format(strNombreTabla), (PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
-            print("\n    RUT: {}\n    NombreApellidos: {}\n    Sexo: {}\n    Direccion: {}\n    Telefono: {}\n    Cargo: {}\n    Fecha Ingreso: {}\n".format(item[0], item[1], item[2], item[3], item[4], item[5], item[6]))
+            print("\n    RUT: {}\n    Nombre: {}\n    Sexo: {}\n    Direccion: {}\n    Telefono: {}\n    Cargo: {}\n    Fecha Ingreso: {}\n".format(item[0], item[1], item[2], item[3], item[4], item[5], item[6]))
 
 # Controladores
 #   C = Crear()
@@ -52,30 +52,27 @@ def Crear(): # Agrega un registro. Pide los datos
     NombresApelidos = input("Ingrese los Nombres y Apellidos: ")
     # Obtener (listar y mostrar) los sexos de la tabla 'SEXO', luego pedir que ingrese uno.
     CRUD_Sexo.Obtener()
-    num_Sexo = int(input("Ingrese opcion: "))
+    num_Sexo = int(input("Ingrese el Codigo del Sexo: "))
     direccion = input("Ingrese la direccion: ")
     telefono = input("Ingrese el numero telefonico: ")
     # Obtener (listar y mostrar) los cargos de la tabla 'CARGOS', luego pedir que ingrese uno.
     CRUD_Cargo.Obtener()
-    num_Cargo = int(input("Ingrese el numero del cargo: "))
-    fechaIngreso = input("Ingrese la fecha de ingreso (dd/MM/yyyy): ")
-    
+    num_Cargo = int(input("Ingrese el Codigo del Cargo: "))
+    fechaIngreso = input("Ingrese la fecha de ingreso (dd/MM/yyyy): ")  
     # Preguntar si se desea crear un contacto de emergencia ahora.
     print("¿Desea crear un contacto de emergencia para el Empleado ahora?\n    1. Si\n    2. No")
     op = int(input("Ingrese opcion: "))
     if (op == 1):
         # crear ahora
         CRUD_ContactoEmergencia.Crear()
-
-    print("¿Desea crear una carga familiar para el Empleado ahora?\n    1. Si\n    2. No")
-    op = int(input("Ingrese opcion: "))
-    if (op == 1):
-        # crear ahora
-        CRUD_CargaFamiliar.Crear()
-
-    # Obtener (listar y mostrar) los contactos de la tabla 'CONTACTO_EMERGENCIA', luego pedir que ingrese uno.
-    CRUD_ContactoEmergencia.Obtener()
-    num_Contacto = int(input("Ingrese opcion: "))
+    continuar = True
+    while continuar:
+        print("¿Desea crear una carga familiar para el Empleado ahora?\n    1. Si\n    2. No")
+        op = int(input("Ingrese la opcion: "))
+        if (op == 1):
+            CRUD_CargaFamiliar.Crear()
+        else:
+            continuar = False
     # [Al finalizar] Se debera generar una contraseña para que luego el empleado pueda acceder a su 'perfil'.
     #   Esta clave debe guardarse en md5 en la tabla 'Credenciales'
     Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso)

@@ -1,5 +1,3 @@
-import os
-import sql_conn
 import Utilidades
 
 

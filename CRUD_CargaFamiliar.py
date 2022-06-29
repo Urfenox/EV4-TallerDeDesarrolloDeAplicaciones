@@ -10,19 +10,19 @@ strNombreTabla = "CARGA_FAMILIAR"
 
 def Agregar(rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo):
     # verificar en que codigo van
-    sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+    sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
     contenido = sql_conn.miCursor.fetchall()
     contadorActual = len(contenido)
-    sql_conn.miCursor.execute("INSERT INTO ? VALUES (?, ?, ?, ?, ?);", (strNombreTabla, rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo))
+    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?, ?);".format(strNombreTabla), (rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo))
     print("\n {} '{}: {}: {}' agregada \n".format(strSingularMin, rut_carga, NombresApellidos, num_Empleado))
     sql_conn.conn.commit()
 
 def Modificar(rut_carga, Nombre):
-    sql_conn.miCursor.execute("UPDATE ? SET NombresApellidos=? WHERE rut_carga=?;", (strNombreTabla, Nombre, rut_carga))
+    sql_conn.miCursor.execute("UPDATE {} SET NombresApellidos=? WHERE rut_carga=?;".format(strNombreTabla), (Nombre, rut_carga))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, rut_carga, Nombre))
 
 def Eliminar(rut_carga):
-    sql_conn.miCursor.execute("DELETE FROM ? WHERE rut_carga=?;", (strNombreTabla, rut_carga)) 
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE rut_carga=?;".format(strNombreTabla), (rut_carga)) 
     print("\n {} '{}' eliminada \n".format(strSingularMin, rut_carga))
 
 def Obtener(PK=NULL):
@@ -32,7 +32,7 @@ def Obtener(PK=NULL):
     #       Obtener(Parametro=PK): Muestra el registro coincidente con la PK.
     if (PK == NULL):
         # Opcion 1: Buscar y mostrar todos
-        sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+        sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
         items = sql_conn.miCursor.fetchall()
         print("--- Inicio registros '{}' ---".format(strSingularMin))
         for item in items:
@@ -40,7 +40,7 @@ def Obtener(PK=NULL):
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM ? WHERE rut_carga=?;", (strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE rut_carga=?;".format(strNombreTabla), (PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    RUT: {}\n    Nombre: {}\n    Empleado: {}\n    Relacion: {}\n    Sexo: {}\n".format(item[0], item[1], item[2], item[3], item[4]))
@@ -55,11 +55,11 @@ def Crear(): # Agrega un registro. Pide los datos
     rut_carga = input("Ingrese el RUT de la Carga Familiar: ")
     NombresApellidos = input("Ingrese el nombre de la Carga Familiar: ")
     CRUD_Empleados.Obtener()
-    num_Empleado = int(input("Ingrese opcion: "))
+    num_Empleado = int(input("Ingrese el Codigo del Empleado: "))
     CRUD_Relacion.Obtener()
-    num_Relacion = int(input("Ingrese opcion: "))
+    num_Relacion = int(input("Ingrese el Codigo de la Relacion: "))
     CRUD_Sexo.Obtener()
-    num_Sexo = int(input("Ingrese opcion: "))
+    num_Sexo = int(input("Ingrese el Codigo del Sexo: "))
     Agregar(rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo)
 
 def Explorar(): # Obtener un registro. Pide PK

@@ -1,5 +1,3 @@
-import os
-import sql_conn
 import CRUD_Empleados
 import Utilidades
 
@@ -17,7 +15,7 @@ def menuPrincipal():
     print("6. Salir")
     op = int(input())
     if op == 1:
-         CRUD_Empleados.Explorar()
+        CRUD_Empleados.Explorar()
     if op == 2:
         CRUD_Empleados.Crear()
     if op == 3:

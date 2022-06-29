@@ -7,19 +7,19 @@ strNombreTabla = "RELACION"
 
 def Agregar(Nombre):
     # verificar en que codigo van
-    sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+    sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
     contenido = sql_conn.miCursor.fetchall()
     contadorActual = len(contenido)
-    sql_conn.miCursor.execute("INSERT INTO ? VALUES (?, ?);", (strNombreTabla, contadorActual, Nombre))
+    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?);".format(strNombreTabla), (contadorActual, Nombre))
     print("\n {} '{}: {}' agregada \n".format(strSingularMin, Nombre, contadorActual))
     sql_conn.conn.commit()
 
 def Modificar(codRelacion, Nombre):
-    sql_conn.miCursor.execute("UPDATE ? SET Nombre=? WHERE codRelacion=?;", (strNombreTabla, Nombre, codRelacion))
+    sql_conn.miCursor.execute("UPDATE {} SET Nombre=? WHERE codRelacion=?;".format(strNombreTabla), (Nombre, codRelacion))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, codRelacion, Nombre))
 
 def Eliminar(codRelacion):
-    sql_conn.miCursor.execute("DELETE FROM ? WHERE codRelacion=?;", (strNombreTabla, codRelacion)) 
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE codRelacion=?;".format(strNombreTabla), (codRelacion)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, codRelacion))
 
 def Obtener(PK=NULL):
@@ -29,7 +29,7 @@ def Obtener(PK=NULL):
     #       Obtener(Parametro=PK): Muestra el registro coincidente con la PK.
     if (PK == NULL):
         # Opcion 1: Buscar y mostrar todos
-        sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+        sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
         items = sql_conn.miCursor.fetchall()
         print("--- Inicio registros '{}' ---".format(strSingularMin))
         for item in items:
@@ -37,7 +37,7 @@ def Obtener(PK=NULL):
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM ? WHERE codRelacion=?;", (strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codRelacion=?;".format(strNombreTabla), (PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    Codigo: {}\n    Nombre: {}\n".format(item[0], item[1]))
@@ -49,7 +49,8 @@ def Obtener(PK=NULL):
 #   D = Remover()
 
 def Crear(): # Agrega un registro. Pide los datos
-    Agregar(input("Ingrese el nombre del la Relacion: "))
+    Nombre = input("Ingrese el nombre del la Relacion: ")
+    Agregar(Nombre)
 
 def Explorar(): # Obtener un registro. Pide PK
     print("Hay dos Opciones para esta funcion:\n    1. Listar todos\n    2. Buscar uno")

@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 import sql_conn
+import CRUD_Area
 
 strPluralMin = "Departamentos"
 strSingularMin = "Departamento"
@@ -7,19 +8,19 @@ strNombreTabla = "DEPARTAMENTO"
 
 def Agregar(Nombre, num_Area):
     # verificar en que codigo van
-    sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+    sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
     contenido = sql_conn.miCursor.fetchall()
     contadorActual = len(contenido)
-    sql_conn.miCursor.execute("INSERT INTO ? VALUES (?, ?, ?);", (strNombreTabla, contadorActual, Nombre, num_Area))
+    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?);".format(strNombreTabla), (contadorActual, Nombre, num_Area))
     print("\n {} '{}: {}: {}' agregado \n".format(strSingularMin, contadorActual, Nombre, num_Area))
     sql_conn.conn.commit()
 
 def Modificar(codDepartamento, Nombre):
-    sql_conn.miCursor.execute("UPDATE ? SET Nombre=? WHERE codDepartamento=?;", (strNombreTabla, Nombre, codDepartamento))
+    sql_conn.miCursor.execute("UPDATE {} SET Nombre=? WHERE codDepartamento=?;".format(strNombreTabla), (Nombre, codDepartamento))
     print("\n {} '{}: {}' modificado \n".format(strSingularMin, codDepartamento, Nombre))
 
 def Eliminar(codDepartamento):
-    sql_conn.miCursor.execute("DELETE FROM ? WHERE codDepartamento=?;", (strNombreTabla, codDepartamento)) 
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE codDepartamento=?;".format(strNombreTabla), (codDepartamento)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, codDepartamento))
 
 def Obtener(PK=NULL):
@@ -29,7 +30,7 @@ def Obtener(PK=NULL):
     #       Obtener(Parametro=PK): Muestra el registro coincidente con la PK.
     if (PK == NULL):
         # Opcion 1: Buscar y mostrar todos
-        sql_conn.miCursor.execute("SELECT * FROM ?;", (strNombreTabla))
+        sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
         items = sql_conn.miCursor.fetchall()
         print("--- Inicio registros '{}' ---".format(strSingularMin))
         for item in items:
@@ -37,7 +38,7 @@ def Obtener(PK=NULL):
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM ? WHERE codDepartamento=?;", (strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codDepartamento=?;".format(strNombreTabla), (PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    Codigo: {}\n    Nombre: {}\n    Area: {}\n".format(item[0], item[1], item[2]))
@@ -49,7 +50,10 @@ def Obtener(PK=NULL):
 #   D = Remover()
 
 def Crear(): # Agrega un registro. Pide los datos
-    Agregar(input("Ingrese el nombre del Departamento: "), int(input("Ingrese el Codigo del Area: ")))
+    Nombre = input("Ingrese el nombre del Area: ")
+    CRUD_Area.Obtener()
+    num_Area = int(input("Ingrese el Codigo del Area: "))
+    Agregar(Nombre, num_Area)
 
 def Explorar(): # Obtener un registro. Pide PK
     print("Hay dos Opciones para esta funcion:\n    1. Listar todos\n    2. Buscar uno")

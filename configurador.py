@@ -41,7 +41,7 @@ def AñadirDatosIniciales():
     print("Ahora vamos a generar datos en la tabla 'Area'.")
     continuar = True
     while continuar:
-        CRUD_Area.Agregar(input("Ingrese el nombre del 'Area': "))
+        CRUD_Area.Crear()
         print("¿Ingresar nueva Area?\n    1. Si\n    2. No")
         op = int(input("Ingrese la opcion: "))
         if (op == 2):
@@ -50,7 +50,7 @@ def AñadirDatosIniciales():
     print("Ahora vamos a generar datos en la tabla 'Departamento'.")
     continuar = True
     while continuar:
-        CRUD_Departamento.Agregar(input("Ingrese el nombre del 'Departamento': "), int(input("Ingrese el vinculo con 'Area': ")))
+        CRUD_Departamento.Crear()
         print("¿Ingresar nuevo 'Departamento'?\n    1. Si\n    2. No")
         op = int(input("Ingrese la opcion: "))
         if (op == 2):
@@ -59,7 +59,7 @@ def AñadirDatosIniciales():
     print("Ahora vamos a generar datos en la tabla 'Cargo'.")
     continuar = True
     while continuar:
-        CRUD_Cargo.Agregar(input("Ingrese el nombre del 'Cargo': "), int(input("Ingrese el vinculo con 'Departamento': ")))
+        CRUD_Cargo.Crear()
         print("¿Ingresar nuevo 'Cargo'?\n    1. Si\n    2. No")
         op = int(input("Ingrese la opcion: "))
         if (op == 2):
@@ -69,7 +69,7 @@ def AñadirDatosIniciales():
     print("Ahora vamos a generar datos en la tabla 'Sexo'.")
     continuar = True
     while continuar:
-        CRUD_Sexo.Agregar(input("Ingrese el nombre del 'Sexo': "))
+        CRUD_Sexo.Crear()
         print("¿Ingresar nuevo 'Sexo'?\n    1. Si\n    2. No")
         op = int(input("Ingrese la opcion: "))
         if (op == 2):
@@ -79,7 +79,7 @@ def AñadirDatosIniciales():
     print("Ahora vamos a generar datos en la tabla 'Relacion'.")
     continuar = True
     while continuar:
-        CRUD_Relacion.Agregar(input("Ingrese el nombre de la 'Relacion': "))
+        CRUD_Relacion.Crear()
         print("¿Ingresar nueva 'Relacion'?\n    1. Si\n    2. No")
         op = int(input("Ingrese la opcion: "))
         if (op == 2):

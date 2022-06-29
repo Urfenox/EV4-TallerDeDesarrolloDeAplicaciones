@@ -1,3 +1,17 @@
+r"""Encargado de manejar las conexiones y brindar las variables para codigo que lo requiera.
+
+Esto hace:
+  - Crea la conexion a la base de datos con la variable global 'conn'.
+  - Crea un cursor para manejar la base de datos con la variable global 'miCursor'.
+  - Crea las tablas.
+    - Crea las tablas.
+    - Crea las PKs.
+    - Crea las FKs.
+
+Es importante que ninguna otra variable haga lo mismo que lo que se hace aqui.
+"""
+
+#'
 import os
 import sqlite3
 
@@ -16,7 +30,7 @@ def iniciarDB():
 #   + crea las PKs
 #   + crea las FKs
 def crearTablas():
-    miCursor.execute("CREATE TABLE IF NOT EXISTS EMPLEADO (rut NUMBER PRIMARY KEY,NombreApellidos VARCHAR2(70),num_Sexo NUMBER,direccion VARCHAR2(70),telefono VARCHAR2(12),num_Cargo NUMBER,fechaIngreso DATE,num_Contacto NUMBER,FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS EMPLEADO (rut NUMBER PRIMARY KEY,NombreApellidos VARCHAR2(70),num_Sexo NUMBER,direccion VARCHAR2(70),telefono VARCHAR2(12),num_Cargo NUMBER,fechaIngreso DATE,FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS CARGO (codCargo NUMBER PRIMARY KEY,nombreCargo VARCHAR2(30),num_Departamento NUMBER,FOREIGN KEY (num_Departamento) REFERENCES DEPARTAMENTO(codDepartamento));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS DEPARTAMENTO (codDepartamento NUMBER PRIMARY KEY,Nombre VARCHAR2(30),num_Area NUMBER,FOREIGN KEY (num_Area) REFERENCES AREA(codArea));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS AREA (codArea NUMBER PRIMARY KEY,Nombre VARCHAR2(30));")

@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS EMPLEADO (
     telefono VARCHAR2(12),
     num_Cargo NUMBER,
     fechaIngreso DATE,
-    num_Contacto NUMBER,
     FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo)
 );
 

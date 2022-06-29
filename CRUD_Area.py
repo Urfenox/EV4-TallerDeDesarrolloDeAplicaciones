@@ -14,11 +14,13 @@ def Agregar(Nombre):
     print("\n {} '{}: {}' agregada \n".format(strSingularMin, contadorActual, Nombre))
     sql_conn.conn.commit()
 
-def Modificar():
-    print("No disponible")
+def Modificar(codArea, Nombre):
+    sql_conn.miCursor.execute("UPDATE ? SET Nombre=? WHERE codArea=?;", (strNombreTabla, Nombre, codArea))
+    print("\n {} '{}: {}' modificado \n".format(strSingularMin, codArea, Nombre))
 
-def Eliminar():
-    print("No disponible")
+def Eliminar(codArea):
+    sql_conn.miCursor.execute("DELETE FROM ? WHERE codArea=?;", (strNombreTabla, codArea)) 
+    print("\n {} '{}' eliminada \n".format(strSingularMin, codArea))
 
 def Obtener(PK=NULL):
     # Obtener lista todos los datos
@@ -39,6 +41,35 @@ def Obtener(PK=NULL):
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    Codigo: {}\n    Nombre: {}\n".format(item[0], item[1]))
+
+# Controladores
+#   C = Crear()
+#   R = Explorar()
+#   U = Actualizar()
+#   D = Remover()
+
+def Crear(): # Agrega un registro. Pide los datos
+    Agregar(input("Ingrese el nombre del Area: "))
+
+def Explorar(): # Obtener un registro. Pide PK
+    print("Hay dos Opciones para esta funcion:\n    1. Listar todos\n    2. Buscar uno")
+    op = int(input("Ingrese la opcion: "))
+    if (op == 1):
+        Obtener()
+    elif (op == 2):
+        Obtener(int(input("Ingrese el Codigo del Area: ")))
+    else:
+        print("Opcion no valida")
+
+def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
+    codArea = int(input("Ingrese el Codigo del Area: "))
+    # Obtener (listar y mostrar)
+    Obtener(codArea)
+    Nombre = input("Ingrese el nuevo nombre del Area: ")
+    Modificar(codArea, Nombre)
+
+def Remover(): # Eliminar un registro. Pide PK
+    Eliminar(int(input("Ingrese el Codigo del Area: ")))
 
 # SOLO PARA PRUEBAS
 # # Crear conexion

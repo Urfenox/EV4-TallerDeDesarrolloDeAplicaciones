@@ -2,6 +2,7 @@ from asyncio.windows_events import NULL
 import sql_conn
 import CRUD_Cargo
 import CRUD_Sexo
+import CRUD_Empleados
 import CRUD_ContactoEmergencia
 import CRUD_CargaFamiliar
 import CRUD_Credenciales
@@ -109,3 +110,35 @@ def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
 
 def Remover(): # Eliminar un registro. Pide PK
     Eliminar(int(input("Ingrese el RUT del Empleado: ")))
+
+# Usos
+
+def ModificarDatosPersonales(rut):
+    CRUD_Empleados.Obtener(rut)
+    # obtener datos antiguos y copiarlos
+    sql_conn.miCursor.execute("SELECT * FROM {};".format(CRUD_Empleados.strNombreTabla))
+    datos = sql_conn.miCursor.fetchall()
+    for item in datos:
+        Nombre = input("Ingrese su nuevo Nombre: (Actual: {})".format(item[1]))
+        Sexo = int(input("Ingrese su nuevo Sexo: (Actual: {})".format(item[2])))
+        Direccion = input("Ingrese su nueva Direccion: (Actual: {})".format(item[3]))
+        Telefono = input("Ingrese su nuevo numero de Telefono: (Actual: {})".format(item[4]))
+        CRUD_Empleados.Modificar(rut, Nombre, Sexo, Direccion, Telefono, item[5], item[6])
+def ModificarContactoDeEmergencia(rut):
+    CRUD_ContactoEmergencia.Obtener(rut)
+    # obtener datos antiguos y copiarlos
+    sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado=?;".format(CRUD_ContactoEmergencia.strNombreTabla), (rut))
+    datos = sql_conn.miCursor.fetchall()
+    for item in datos:
+        Nombre = input("Ingrese su nuevo Nombre: (Actual: {})".format(item[1]))
+        Sexo = int(input("Ingrese el nuevo Sexo: (Actual: {})".format(item[3])))
+        contacto = input("Ingrese la nueva informacion de Contacto: (Actual: {})".format(item[5]))
+        CRUD_ContactoEmergencia.Modificar(Nombre, item[2], Sexo, rut, contacto)
+def ModificarCargaFamiliar():
+    rut_carga = int(input("Ingrese el RUT de la Carga Familiar: "))
+    # obtener datos antiguos y copiarlos
+    sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado=?;".format(CRUD_CargaFamiliar.strNombreTabla), (rut_carga))
+    datos = sql_conn.miCursor.fetchall()
+    for item in datos:
+        Nombre = input("Ingrese su nuevo Nombre: (Actual: {})".format(item[1]))
+        CRUD_CargaFamiliar.Modificar(rut_carga, Nombre)

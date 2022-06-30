@@ -34,4 +34,4 @@ def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
     print("No disponible")
 
 def Remover(): # Eliminar un registro. Pide PK
-    Eliminar(int(input("Ingrese el RUT del Empleado: ")))
+    print("No disponible")

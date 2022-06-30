@@ -12,7 +12,6 @@ Es importante que ninguna otra variable haga lo mismo que lo que se hace aqui.
 """
 
 #'
-import os
 import sqlite3
 
 # Crea la conexion a la base de datos

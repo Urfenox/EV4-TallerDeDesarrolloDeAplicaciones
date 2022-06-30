@@ -1,7 +1,8 @@
 import Utilidades
+import CRUD_Empleados
 import CRUD_Credenciales
 
-
+miRUT = None
 
 def menuPrincipal():
     Utilidades.limpiarConsola()
@@ -13,11 +14,11 @@ def menuPrincipal():
     print("4. Salir")
     op = int(input())
     if op == 1:
-        print("No disponible")
+        CRUD_Empleados.ModificarDatosPersonales(miRUT)
     if op == 2:
-        print("No disponible")
+        CRUD_Empleados.ModificarContactoDeEmergencia(miRUT)
     if op == 3:
-        print("No disponible")
+        CRUD_Empleados.ModificarCargaFamiliar()
     if op == 4:
         repetir = False
     return False
@@ -30,6 +31,7 @@ def iniciarMenu():
 def inicioSesion():
     rut = input("Ingrese su RUT: ")
     clave = input("Ingrese su Clave: ")
+    miRUT = rut
     if (CRUD_Credenciales.VerificarCredencial(rut, clave) == True):
         iniciarMenu()
     else:

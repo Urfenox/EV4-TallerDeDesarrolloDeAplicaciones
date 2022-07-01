@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import os
 import sql_conn
 import CRUD_Empleados
@@ -15,7 +14,7 @@ def Modificar():
 def Eliminar():
     print("No disponible")
 
-def Obtener(PK=NULL):
+def Obtener(PK=None):
     print("No disponible")
 
 # Controladores

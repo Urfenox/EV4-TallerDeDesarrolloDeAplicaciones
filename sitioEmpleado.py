@@ -31,7 +31,8 @@ def iniciarMenu():
 def inicioSesion():
     rut = input("Ingrese su RUT: ")
     clave = input("Ingrese su Clave: ")
-    miRUT = rut
+    global miRUT
+    miRUT = int(rut)
     if (CRUD_Credenciales.VerificarCredencial(rut, clave) == True):
         iniciarMenu()
     else:

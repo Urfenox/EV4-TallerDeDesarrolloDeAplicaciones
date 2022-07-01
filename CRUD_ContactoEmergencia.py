@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import sql_conn
 import CRUD_Relacion
 import CRUD_Cargo
@@ -23,16 +22,16 @@ def Modificar(codContacto, Nombre, Contacto):
     sql_conn.conn.commit()
 
 def Eliminar(codContacto):
-    sql_conn.miCursor.execute("DELETE FROM {} WHERE codContacto=?;".format(strNombreTabla), (codContacto)) 
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE codContacto={};".format(strNombreTabla, codContacto)) 
     print("\n {} '{}' eliminado \n".format(strSingularMin, codContacto))
     sql_conn.conn.commit()
 
-def Obtener(PK=NULL):
+def Obtener(PK=None):
     # Obtener lista todos los datos
     #   Opciones:
     #       Obtener(sinParametro): Lista todos los registros
     #       Obtener(Parametro=PK): Muestra el registro coincidente con la PK.
-    if (PK == NULL):
+    if (PK == None):
         # Opcion 1: Buscar y mostrar todos
         sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
         items = sql_conn.miCursor.fetchall()
@@ -42,7 +41,7 @@ def Obtener(PK=NULL):
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codContacto=?;".format(strNombreTabla), (PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codContacto={};".format(strNombreTabla, PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    Codigo: {}\n    Nombre: {}\n    Relacion: {}\n    Sexo: {}\n    Empleado: {}\n    Contacto: {}\n".format(item[0], item[1], item[2], item[3], item[4], item[5]))

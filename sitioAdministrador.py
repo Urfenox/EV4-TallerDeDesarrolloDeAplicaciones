@@ -52,12 +52,16 @@ def menuEmpleado():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Empleado()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Empleado()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Empleado()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Empleado()
+        Utilidades.pausarContinuar()
 
 def C_Cargo():
     continuar = True
@@ -100,12 +104,16 @@ def menuCargo():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Cargo()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Cargo()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Cargo()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Cargo()
+        Utilidades.pausarContinuar()
 
 def C_Departamento():
     continuar = True
@@ -148,12 +156,16 @@ def menuDepartamento():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Departamento()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Departamento()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Departamento()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Departamento()
+        Utilidades.pausarContinuar()
 
 def C_Area():
     continuar = True
@@ -196,12 +208,16 @@ def menuArea():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Area()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Area()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Area()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Area()
+        Utilidades.pausarContinuar()
 
 def C_Sexo():
     continuar = True
@@ -244,12 +260,16 @@ def menuSexo():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Sexo()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Sexo()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Sexo()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Sexo()
+        Utilidades.pausarContinuar()
 
 def C_CargaFamiliar():
     continuar = True
@@ -292,12 +312,16 @@ def menuCargaFamiliar():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_CargaFamiliar()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_CargaFamiliar()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_CargaFamiliar()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_CargaFamiliar()
+        Utilidades.pausarContinuar()
 
 def C_Relacion():
     continuar = True
@@ -340,12 +364,16 @@ def menuRelacion():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Relacion()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Relacion()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Relacion()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Relacion()
+        Utilidades.pausarContinuar()
 
 def C_ContactoEmergencia():
     continuar = True
@@ -388,12 +416,16 @@ def menuContactoEmergencia():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_ContactoEmergencia()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_ContactoEmergencia()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_ContactoEmergencia()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_ContactoEmergencia()
+        Utilidades.pausarContinuar()
 
 def C_Credenciales():
     continuar = True
@@ -436,12 +468,16 @@ def menuCredenciales():
     op = int(input("Ingrese su opcion: "))
     if (op == 1):
         C_Credenciales()
+        Utilidades.pausarContinuar()
     elif (op == 2):
         R_Credenciales()
+        Utilidades.pausarContinuar()
     elif (op == 3):
         U_Credenciales()
+        Utilidades.pausarContinuar()
     elif (op == 4):
         D_Credenciales()
+        Utilidades.pausarContinuar()
 
 def menuPrincipal():
     repetir = True
@@ -477,7 +513,7 @@ def menuPrincipal():
         menuCredenciales()
     if op == 10:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu
 def iniciarMenu():
@@ -500,7 +536,7 @@ def Administrador():
         iniciarSesion()
     if op == 2:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu inicial (accesible solo por llamada externa)
 def menuAdministrador():

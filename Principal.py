@@ -28,12 +28,13 @@ def menuPrincipal():
         sitioAdministrador.menuAdministrador()
     if op == 5:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu
 def iniciarMenu():
     while (menuPrincipal()):
         pass
+    Utilidades.salirPrograma()
 
 def Principal():
     configurador.iniciador()

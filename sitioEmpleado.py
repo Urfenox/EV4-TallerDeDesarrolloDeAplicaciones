@@ -15,13 +15,16 @@ def menuPrincipal():
     op = int(input())
     if op == 1:
         CRUD_Empleados.ModificarDatosPersonales(miRUT)
+        Utilidades.pausarContinuar()
     if op == 2:
         CRUD_Empleados.ModificarContactoDeEmergencia(miRUT)
+        Utilidades.pausarContinuar()
     if op == 3:
         CRUD_Empleados.ModificarCargaFamiliar()
+        Utilidades.pausarContinuar()
     if op == 4:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu principal (solo accesible desde inicioSesion())
 def iniciarMenu():
@@ -54,7 +57,7 @@ def Empleado():
         menuInicioSesion()
     if op == 2:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu inicial (accesible solo por llamada externa)
 def menuEmpleado():

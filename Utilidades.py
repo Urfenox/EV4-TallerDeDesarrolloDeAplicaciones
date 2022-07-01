@@ -1,4 +1,6 @@
 import os
+import sys
+import time
 import random
 import string
 import sql_conn
@@ -31,6 +33,17 @@ def eliminarBaseDeDatos(forzar):
         if (clave == claveAdmin):
             _eliminarDDB()
 
+def pausarContinuar():
+    input("Presione 'Enter' para continuar...")
+
+def salirPrograma():
+    limpiarConsola()
+    print("Cerrando...")
+    time.sleep(2)
+    print("¡No vemos! ;)")
+    time.sleep(1)
+    sys.exit() # Cierra el programa.
+    
 def limpiarConsola():
     # Limpia la consola
     os.system("cls")

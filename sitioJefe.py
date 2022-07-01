@@ -12,9 +12,10 @@ def menuPrincipal():
     op = int(input())
     if op == 1:
         print("No disponible")
+        Utilidades.pausarContinuar()
     if op == 2:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu principal (solo accesible desde inicioSesion())
 def iniciarMenu():
@@ -45,7 +46,7 @@ def Jefe():
         menuInicioSesion()
     if op == 2:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu inicial (accesible solo por llamada externa)
 def menuJefe():

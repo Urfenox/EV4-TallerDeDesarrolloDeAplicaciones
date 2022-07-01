@@ -16,17 +16,22 @@ def menuPrincipal():
     op = int(input())
     if op == 1:
         CRUD_Empleados.Explorar()
+        Utilidades.pausarContinuar()
     if op == 2:
         CRUD_Empleados.Crear()
+        Utilidades.pausarContinuar()
     if op == 3:
         CRUD_Empleados.Obtener((int(input("Ingrese el RUT del Empleado: "))))
+        Utilidades.pausarContinuar()
     if op == 4:
         CRUD_Empleados.Remover()
+        Utilidades.pausarContinuar()
     if op == 5:
         CRUD_Empleados.Actualizar()
+        Utilidades.pausarContinuar()
     if op == 6:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu principal (solo accesible desde inicioSesion())
 def iniciarMenu():
@@ -54,7 +59,7 @@ def RecursosHumanos():
         menuInicioSesion()
     if op == 2:
         repetir = False
-    return False
+    return repetir
 
 # Ejecucion del menu inicial (accesible solo por llamada externa)
 def menuRecursosHumanos():

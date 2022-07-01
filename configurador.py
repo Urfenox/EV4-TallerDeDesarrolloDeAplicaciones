@@ -114,7 +114,7 @@ def primerInicio():
         time.sleep(3)
         Utilidades.eliminarBaseDeDatos(True) # Elimina la base de datos (ya que esta vacia).
         #   Asi la proxima puede volver a configurar.
-        sys.exit() # Cierra el programa.
+        Utilidades.salirPrograma()
     else:
         Utilidades.limpiarConsola()
         print("\n¡Gracias por leer y aceptar nuestro EULA!\n")
@@ -129,4 +129,4 @@ def primerInicio():
         print("    Clave 'Administrador': {}".format(Utilidades.claveAdmin))
         print("    Clave 'Recursos Humanos': {}".format(Utilidades.claveRRHH))
         time.sleep(5)
-        input("Presione 'Enter' para continuar...")
+        Utilidades.pausarContinuar()

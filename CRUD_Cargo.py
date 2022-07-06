@@ -5,6 +5,12 @@ strPluralMin = "Cargos"
 strSingularMin = "Cargo"
 strNombreTabla = "CARGO"
 
+class cCarga:
+    def __init__(self, codCargo, nombreCargo, num_Departamento):
+        self.codCargo = codCargo
+        self.nombreCargo = nombreCargo
+        self.num_Departamento = num_Departamento
+
 def Agregar(Nombre, num_Departamento):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))

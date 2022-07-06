@@ -7,6 +7,15 @@ strPluralMin = "Contactos de Emergencias"
 strSingularMin = "Contacto de Emergencia"
 strNombreTabla = "CONTACTO_EMERGENCIA"
 
+class cContactoEmergencia:
+    def __init__(self, codContacto, NombreApellido, num_Relacion, num_Sexo, num_Empleado, contacto):
+        self.codContacto = codContacto
+        self.NombreApellido = NombreApellido
+        self.num_Relacion = num_Relacion
+        self.num_Sexo = num_Sexo
+        self.num_Empleado = num_Empleado
+        self.contacto = contacto
+
 def Agregar(NombreApellido, num_Relacion, num_Sexo, num_Empleado, contacto):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))

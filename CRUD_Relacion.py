@@ -4,6 +4,11 @@ strPluralMin = "Relaciones"
 strSingularMin = "Relacion"
 strNombreTabla = "RELACION"
 
+class cRelacion:
+    def __init__(self, codRelacion, Nombre):
+        self.codRelacion = codRelacion
+        self.Nombre = Nombre
+
 def Agregar(Nombre):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))

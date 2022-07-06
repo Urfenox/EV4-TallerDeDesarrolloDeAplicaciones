@@ -5,6 +5,13 @@ strPluralMin = "Credenciales"
 strSingularMin = "Credencial"
 strNombreTabla = "CREDENCIAL"
 
+class cCredencial:
+    def __init__(self, codCredencial, IDENT, Usuario, Clave):
+        self.codCredencial = codCredencial
+        self.IDENT = IDENT
+        self.Usuario = Usuario
+        self.Clave = Clave
+
 def Agregar(IDENT, Usuario, Clave):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))

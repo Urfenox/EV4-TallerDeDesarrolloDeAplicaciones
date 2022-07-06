@@ -10,6 +10,17 @@ strPluralMin = "Empleados"
 strSingularMin = "Empleado"
 strNombreTabla = "EMPLEADO"
 
+class cEmpleado:
+    def __init__(self, rut, NombreApellidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso, num_Contacto):
+        self.rut = rut
+        self.NombreApellidos = NombreApellidos
+        self.num_Sexo = num_Sexo
+        self.direccion = direccion
+        self.telefono = telefono
+        self.num_Cargo = num_Cargo
+        self.fechaIngreso = fechaIngreso
+        self.num_Contacto = num_Contacto
+
 def Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso):
     sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?, ?, ?, ?);".format(strNombreTabla), (RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso))
     print("\n {} '{}: {}' agregado \n".format(strSingularMin, RUT, NombresApelidos))

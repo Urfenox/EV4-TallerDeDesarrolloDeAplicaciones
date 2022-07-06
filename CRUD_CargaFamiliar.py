@@ -7,6 +7,12 @@ strPluralMin = "Cargas Camiliares"
 strSingularMin = "Carga Familiar"
 strNombreTabla = "CARGA_FAMILIAR"
 
+class cCargaFamiliar:
+    def __init__(self, codDepartamento, Nombre, num_Area):
+        self.codArea = codDepartamento
+        self.Nombre = Nombre
+        self.num_Area = num_Area
+
 def Agregar(rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))

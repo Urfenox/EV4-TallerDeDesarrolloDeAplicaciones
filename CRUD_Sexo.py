@@ -4,6 +4,11 @@ strPluralMin = "Sexos"
 strSingularMin = "Sexo"
 strNombreTabla = "SEXO"
 
+class cSexo:
+    def __init__(self, codSexo, Nombre):
+        self.codSexo = codSexo
+        self.Nombre = Nombre
+
 def Agregar(Nombre):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))

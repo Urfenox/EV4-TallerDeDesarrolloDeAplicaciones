@@ -37,7 +37,7 @@ def iniciarMenu():
     Utilidades.salirPrograma()
 
 def Principal():
-    configurador.iniciador()
+    configurador.verificarIntegridad()
     iniciarMenu()
 
 Principal()

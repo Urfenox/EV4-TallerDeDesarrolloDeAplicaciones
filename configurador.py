@@ -12,9 +12,17 @@ import CRUD_Relacion
 # 29/06/2022 03:36 PM. Funciona.
 
 # Solo se llama al iniciar el programa
+def verificarIntegridad():
+    if (os.path.exists("inicio.tmp") == True):
+        os.remove("myDB.db")
+        os.remove("inicio.tmp")
+    iniciador()
+
 def iniciador():
     if (os.path.exists("myDB.db") == False):
         # El programa se debe configurar
+        with open('inicio.tmp', 'w') as f:
+            f.write('Archivo de verificacion de inicio.\nNo eliminar.')
         # Crear conexion
         sql_conn.abrirConn()
         # Iniciar Base de Datos
@@ -129,4 +137,5 @@ def primerInicio():
         print("    Clave 'Administrador': {}".format(Utilidades.claveAdmin))
         print("    Clave 'Recursos Humanos': {}".format(Utilidades.claveRRHH))
         time.sleep(5)
+        os.remove("inicio.tmp")
         Utilidades.pausarContinuar()

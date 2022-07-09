@@ -6,7 +6,7 @@ import string
 import sql_conn
 import Utilidades
 
-
+os.system("title myEmployeerArray")
 
 def generarStringAleatorio(longitud):
     letters = string.ascii_lowercase

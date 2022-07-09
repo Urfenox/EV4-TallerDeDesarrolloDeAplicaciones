@@ -1,6 +1,7 @@
 import sql_conn
 import CRUD_Cargo
 import CRUD_Sexo
+import sitioEmpleado
 import CRUD_Empleados
 import CRUD_ContactoEmergencia
 import CRUD_CargaFamiliar
@@ -73,7 +74,9 @@ def Crear(): # Agrega un registro. Pide los datos
     # Obtener (listar y mostrar) los cargos de la tabla 'CARGOS', luego pedir que ingrese uno.
     CRUD_Cargo.Obtener()
     num_Cargo = int(input("Ingrese el Codigo del Cargo: "))
-    fechaIngreso = input("Ingrese la fecha de ingreso (dd/MM/yyyy): ")  
+    fechaIngreso = input("Ingrese la fecha de ingreso (dd/MM/yyyy): ")
+    print(CRUD_Credenciales.AgregarCredencialAuto(RUT, NombresApelidos[:20]))
+    Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso)
     # Preguntar si se desea crear un contacto de emergencia ahora.
     print("¿Desea crear un contacto de emergencia para el Empleado ahora?\n    1. Si\n    2. No")
     op = int(input("Ingrese opcion: "))
@@ -88,9 +91,6 @@ def Crear(): # Agrega un registro. Pide los datos
             CRUD_CargaFamiliar.Crear()
         else:
             continuar = False
-    # [Al finalizar] Se debera generar una contraseña para que luego el empleado pueda acceder a su 'perfil'.
-    print(CRUD_Credenciales.AgregarCredencialAuto(RUT, NombresApelidos[:20]))
-    Agregar(RUT, NombresApelidos, num_Sexo, direccion, telefono, num_Cargo, fechaIngreso)
 
 def Explorar(): # Obtener un registro. Pide PK
     print("Hay dos Opciones para esta funcion:\n    1. Listar todos\n    2. Buscar uno")
@@ -105,7 +105,7 @@ def Explorar(): # Obtener un registro. Pide PK
 def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
     RUT = int(input("Ingrese el RUT del Empleado: "))
     # Obtener (listar y mostrar)
-    CRUD_Sexo.Obtener(RUT)
+    Obtener(RUT)
     NombresApelidos = input("Ingrese los nuevos Nombres y Apellidos: ")
     # Obtener (listar y mostrar)
     CRUD_Sexo.Obtener()
@@ -134,21 +134,55 @@ def ModificarDatosPersonales(rut):
         Direccion = input("Ingrese su nueva Direccion: (Actual: {})".format(item[3]))
         Telefono = input("Ingrese su nuevo numero de Telefono: (Actual: {})".format(item[4]))
         CRUD_Empleados.Modificar(rut, Nombre, Sexo, Direccion, Telefono, item[5], item[6])
+
 def ModificarContactoDeEmergencia(rut):
     CRUD_ContactoEmergencia.Obtener(rut)
     # obtener datos antiguos y copiarlos
-    sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado=?;".format(CRUD_ContactoEmergencia.strNombreTabla), (rut))
+    sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado={};".format(CRUD_ContactoEmergencia.strNombreTabla, rut))
     datos = sql_conn.miCursor.fetchall()
     for item in datos:
         Nombre = input("Ingrese su nuevo Nombre: (Actual: {})".format(item[1]))
-        Sexo = int(input("Ingrese el nuevo Sexo: (Actual: {})".format(item[3])))
         contacto = input("Ingrese la nueva informacion de Contacto: (Actual: {})".format(item[5]))
-        CRUD_ContactoEmergencia.Modificar(Nombre, item[2], Sexo, rut, contacto)
+        CRUD_ContactoEmergencia.Modificar(rut, Nombre, contacto)
+
+def menuCargaFamiliar():
+    op = int(input("¿Que quiere hacer ahora?\n    1. Listar cargas familiares\n    2. Modificar carga existente\n    3. Crear nueva carga\n    4. Eliminar carga\n"))
+    if (op == 1):
+        ListarCargasFamiliares()
+    elif (op == 2):
+        ModificarCargaFamiliar()
+    elif (op == 3):
+        CrearCargaFamiliar()
+    elif (op == 4):
+        EliminarCargaFamiliar()
+
+def ListarCargasFamiliares():
+    sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado={};".format(CRUD_CargaFamiliar.strNombreTabla, sitioEmpleado.miRUT))
+    items = sql_conn.miCursor.fetchall()
+    for item in items:
+        print("\n    Codigo: {}\n    Nombre: {}\n    Empleado: {}\n    Relacion: {}\n    Sexo: {}\n".format(item[0], item[1], item[2], item[3], item[4]))
+
 def ModificarCargaFamiliar():
-    rut_carga = int(input("Ingrese el RUT de la Carga Familiar: "))
-    # obtener datos antiguos y copiarlos
-    sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado=?;".format(CRUD_CargaFamiliar.strNombreTabla), (rut_carga))
+    ListarCargasFamiliares()
+    # obtener datos y mostrarlos
+    codCarga = int(input("Ingrese el codigo de la carga: "))
+    sql_conn.miCursor.execute("SELECT * FROM {} WHERE codCarga={};".format(CRUD_CargaFamiliar.strNombreTabla, codCarga))
     datos = sql_conn.miCursor.fetchall()
     for item in datos:
         Nombre = input("Ingrese su nuevo Nombre: (Actual: {})".format(item[1]))
-        CRUD_CargaFamiliar.Modificar(rut_carga, Nombre)
+        CRUD_CargaFamiliar.Modificar(codCarga, Nombre)
+
+def CrearCargaFamiliar():
+    continuar = True
+    while continuar:
+        print("¿Desea crear una carga familiar para ahora?\n    1. Si\n    2. No")
+        op = int(input("Ingrese la opcion: "))
+        if (op == 1):
+            CRUD_CargaFamiliar.Crear(sitioEmpleado.miRUT)
+        else:
+            continuar = False
+
+def EliminarCargaFamiliar():
+    ListarCargasFamiliares()
+    codCarga = int(input("Ingrese el codigo de la carga a eliminar: "))
+    CRUD_CargaFamiliar.Eliminar(codCarga)

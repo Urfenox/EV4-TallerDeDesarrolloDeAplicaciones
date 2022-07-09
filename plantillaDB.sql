@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS SEXO (
 );
 
 CREATE TABLE IF NOT EXISTS CARGA_FAMILIAR (
-    rut_carga NUMBER PRIMARY KEY,
+    codCarga NUMBER PRIMARY KEY,
     NombresApellidos VARCHAR2(30),
     num_Empleado NUMBER,
     num_Relacion NUMBER,

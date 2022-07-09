@@ -13,23 +13,23 @@ class cCargaFamiliar:
         self.Nombre = Nombre
         self.num_Area = num_Area
 
-def Agregar(rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo):
+def Agregar(NombresApellidos, num_Empleado, num_Relacion, num_Sexo):
     # verificar en que codigo van
     sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
     contenido = sql_conn.miCursor.fetchall()
     contadorActual = len(contenido)
-    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?, ?);".format(strNombreTabla), (rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo))
-    print("\n {} '{}: {}: {}' agregada \n".format(strSingularMin, rut_carga, NombresApellidos, num_Empleado))
+    sql_conn.miCursor.execute("INSERT INTO {} VALUES (?, ?, ?, ?, ?);".format(strNombreTabla), (contadorActual, NombresApellidos, num_Empleado, num_Relacion, num_Sexo))
+    print("\n {} '{}: {}: {}' agregada \n".format(strSingularMin, contadorActual, NombresApellidos, num_Empleado))
     sql_conn.conn.commit()
 
-def Modificar(rut_carga, Nombre):
-    sql_conn.miCursor.execute("UPDATE {} SET NombresApellidos=? WHERE rut_carga=?;".format(strNombreTabla), (Nombre, rut_carga))
-    print("\n {} '{}: {}' modificado \n".format(strSingularMin, rut_carga, Nombre))
+def Modificar(codCarga, Nombre):
+    sql_conn.miCursor.execute("UPDATE {} SET NombresApellidos=? WHERE codCarga=?;".format(strNombreTabla), (Nombre, codCarga))
+    print("\n {} '{}: {}' modificado \n".format(strSingularMin, codCarga, Nombre))
     sql_conn.conn.commit()
 
-def Eliminar(rut_carga):
-    sql_conn.miCursor.execute("DELETE FROM {} WHERE rut_carga={};".format(strNombreTabla, rut_carga)) 
-    print("\n {} '{}' eliminada \n".format(strSingularMin, rut_carga))
+def Eliminar(codCarga):
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE codCarga={};".format(strNombreTabla, codCarga)) 
+    print("\n {} '{}' eliminada \n".format(strSingularMin, codCarga))
     sql_conn.conn.commit()
 
 def Obtener(PK=None):
@@ -43,14 +43,14 @@ def Obtener(PK=None):
         items = sql_conn.miCursor.fetchall()
         print("--- Inicio registros '{}' ---".format(strSingularMin))
         for item in items:
-            print("\n    RUT: {}\n    Nombre: {}\n    Empleado: {}\n    Relacion: {}\n    Sexo: {}\n".format(item[0], item[1], item[2], item[3], item[4]))
+            print("\n    Codigo: {}\n    Nombre: {}\n    Empleado: {}\n    Relacion: {}\n    Sexo: {}\n".format(item[0], item[1], item[2], item[3], item[4]))
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM {} WHERE rut_carga={};".format(strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codCarga={};".format(strNombreTabla, PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
-            print("\n    RUT: {}\n    Nombre: {}\n    Empleado: {}\n    Relacion: {}\n    Sexo: {}\n".format(item[0], item[1], item[2], item[3], item[4]))
+            print("\n    Codigo: {}\n    Nombre: {}\n    Empleado: {}\n    Relacion: {}\n    Sexo: {}\n".format(item[0], item[1], item[2], item[3], item[4]))
 
 # Controladores
 #   C = Crear()
@@ -58,16 +58,16 @@ def Obtener(PK=None):
 #   U = Actualizar()
 #   D = Remover
 
-def Crear(): # Agrega un registro. Pide los datos
-    rut_carga = input("Ingrese el RUT de la Carga Familiar: ")
+def Crear(num_Empleado): # Agrega un registro. Pide los datos
     NombresApellidos = input("Ingrese el nombre de la Carga Familiar: ")
     CRUD_Empleados.Obtener()
-    num_Empleado = int(input("Ingrese el Codigo del Empleado: "))
+    if (num_Empleado == None):
+        num_Empleado = int(input("Ingrese el Codigo del Empleado: "))
     CRUD_Relacion.Obtener()
     num_Relacion = int(input("Ingrese el Codigo de la Relacion: "))
     CRUD_Sexo.Obtener()
     num_Sexo = int(input("Ingrese el Codigo del Sexo: "))
-    Agregar(rut_carga, NombresApellidos, num_Empleado, num_Relacion, num_Sexo)
+    Agregar(NombresApellidos, num_Empleado, num_Relacion, num_Sexo)
 
 def Explorar(): # Obtener un registro. Pide PK
     print("Hay dos Opciones para esta funcion:\n    1. Listar todos\n    2. Buscar uno")
@@ -75,16 +75,16 @@ def Explorar(): # Obtener un registro. Pide PK
     if (op == 1):
         Obtener()
     elif (op == 2):
-        Obtener(int(input("Ingrese el RUT de la Carga Familiar: ")))
+        Obtener(int(input("Ingrese el Codigo de la Carga Familiar: ")))
     else:
         print("Opcion no valida")
 
 def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
-    rut_carga = int(input("Ingrese el RUT de la Carga Familiar: "))
+    codCarga = int(input("Ingrese el Codigo de la Carga Familiar: "))
     # Obtener (listar y mostrar)
-    Obtener(rut_carga)
+    Obtener(codCarga)
     Nombre = input("Ingrese el nuevo nombre de la Carga Familiar: ")
-    Modificar(rut_carga, Nombre)
+    Modificar(codCarga, Nombre)
 
 def Remover(): # Eliminar un registro. Pide PK
-    Eliminar(int(input("Ingrese el RUT de la Carga Familiar: ")))
+    Eliminar(int(input("Ingrese el Codigo de la Carga Familiar: ")))

@@ -20,7 +20,7 @@ def menuPrincipal():
         CRUD_Empleados.ModificarContactoDeEmergencia(miRUT)
         Utilidades.pausarContinuar()
     if op == 3:
-        CRUD_Empleados.ModificarCargaFamiliar()
+        CRUD_Empleados.menuCargaFamiliar()
         Utilidades.pausarContinuar()
     if op == 4:
         repetir = False

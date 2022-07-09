@@ -7,18 +7,18 @@ def menuPrincipal():
     Utilidades.limpiarConsola()
     repetir = True
     print("\n --- Bienvenido a 'Recursos Humanos' ---")
-    print("1. Listar Empleados")
-    print("2. Agregar Empleado")
+    print("1. Agregar Empleado")
+    print("2. Listar Empleados")
     print("3. Buscar Empleado")
     print("4. Eliminar Empleado")
     print("5. Modificar Empleado")
     print("6. Salir")
     op = int(input())
     if op == 1:
-        CRUD_Empleados.Explorar()
+        CRUD_Empleados.Crear()
         Utilidades.pausarContinuar()
     if op == 2:
-        CRUD_Empleados.Crear()
+        CRUD_Empleados.Explorar()
         Utilidades.pausarContinuar()
     if op == 3:
         CRUD_Empleados.Obtener((int(input("Ingrese el RUT del Empleado: "))))

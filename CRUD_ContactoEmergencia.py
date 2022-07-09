@@ -1,6 +1,6 @@
 import sql_conn
+import CRUD_Sexo
 import CRUD_Relacion
-import CRUD_Cargo
 import CRUD_Empleados
 
 strPluralMin = "Contactos de Emergencias"
@@ -25,14 +25,14 @@ def Agregar(NombreApellido, num_Relacion, num_Sexo, num_Empleado, contacto):
     print("\n {} '{}: {}: {}' agregado \n".format(strSingularMin, contadorActual, NombreApellido, num_Empleado))
     sql_conn.conn.commit()
 
-def Modificar(codContacto, Nombre, Contacto):
-    sql_conn.miCursor.execute("UPDATE {} SET NombreApellido=?, contacto=? WHERE codContacto=?;".format(strNombreTabla), (Nombre, Contacto, codContacto))
-    print("\n {} '{}: {}' modificado \n".format(strSingularMin, codContacto, Nombre))
+def Modificar(num_Empleado, Nombre, Contacto):
+    sql_conn.miCursor.execute("UPDATE {} SET NombreApellido=?, contacto=? WHERE num_Empleado=?;".format(strNombreTabla), (Nombre, Contacto, num_Empleado))
+    print("\n {} '{}: {}' modificado \n".format(strSingularMin, num_Empleado, Nombre))
     sql_conn.conn.commit()
 
-def Eliminar(codContacto):
-    sql_conn.miCursor.execute("DELETE FROM {} WHERE codContacto={};".format(strNombreTabla, codContacto)) 
-    print("\n {} '{}' eliminado \n".format(strSingularMin, codContacto))
+def Eliminar(num_Empleado):
+    sql_conn.miCursor.execute("DELETE FROM {} WHERE num_Empleado={};".format(strNombreTabla, num_Empleado)) 
+    print("\n {} '{}' eliminado \n".format(strSingularMin, num_Empleado))
     sql_conn.conn.commit()
 
 def Obtener(PK=None):
@@ -50,7 +50,7 @@ def Obtener(PK=None):
         print("--- Fin registros '{}' ---".format(strSingularMin))
     else:
         # Opcion 2: Buscar y mostrar
-        sql_conn.miCursor.execute("SELECT * FROM {} WHERE codContacto={};".format(strNombreTabla, PK))
+        sql_conn.miCursor.execute("SELECT * FROM {} WHERE num_Empleado={};".format(strNombreTabla, PK))
         items = sql_conn.miCursor.fetchall()
         for item in items:
             print("\n    Codigo: {}\n    Nombre: {}\n    Relacion: {}\n    Sexo: {}\n    Empleado: {}\n    Contacto: {}\n".format(item[0], item[1], item[2], item[3], item[4], item[5]))
@@ -59,13 +59,13 @@ def Obtener(PK=None):
 #   C = Crear()
 #   R = Explorar()
 #   U = Actualizar()
-#   D = Remover
+#   D = Remover()
 
 def Crear(): # Agrega un registro. Pide los datos
     NombreApellido = input("Ingrese los Nombres y Apellidos: ")
     CRUD_Relacion.Obtener()
     num_Relacion = int(input("Ingrese el Codigo de la Relacion: "))
-    CRUD_Cargo.Obtener()
+    CRUD_Sexo.Obtener()
     num_Sexo = int(input("Ingrese opcion: "))
     CRUD_Empleados.Obtener()
     num_Empleado = int(input("Ingrese el Codigo del Empleado: "))
@@ -83,12 +83,12 @@ def Explorar(): # Obtener un registro. Pide PK
         print("Opcion no valida")
 
 def Actualizar(): # Modificar un registro. Pide PK y nuevos datos
-    codContacto = int(input("Ingrese el Codigo del Contacto: "))
+    num_Empleado = int(input("Ingrese el Codigo del Contacto: "))
     # Obtener (listar y mostrar)
-    Obtener(codContacto)
+    Obtener(num_Empleado)
     Nombre = input("Ingrese el nuevo nombre del Contacto: ")
     Contacto = input("Ingrese el nuevo Contacto: ")
-    Modificar(codContacto, Nombre, Contacto)
+    Modificar(num_Empleado, Nombre, Contacto)
 
 def Remover(): # Eliminar un registro. Pide PK
     Eliminar(int(input("Ingrese el Codigo del Contacto: ")))

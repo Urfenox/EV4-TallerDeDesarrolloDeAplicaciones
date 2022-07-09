@@ -34,7 +34,7 @@ def crearTablas():
     miCursor.execute("CREATE TABLE IF NOT EXISTS DEPARTAMENTO (codDepartamento NUMBER PRIMARY KEY,Nombre VARCHAR2(30),num_Area NUMBER,FOREIGN KEY (num_Area) REFERENCES AREA(codArea));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS AREA (codArea NUMBER PRIMARY KEY,Nombre VARCHAR2(30));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS SEXO (codSexo NUMBER PRIMARY KEY,Nombre VARCHAR2(20));")
-    miCursor.execute("CREATE TABLE IF NOT EXISTS CARGA_FAMILIAR (rut_carga NUMBER PRIMARY KEY,NombresApellidos VARCHAR2(30),num_Empleado NUMBER,num_Relacion NUMBER,num_Sexo NUMBER,FOREIGN KEY (num_Empleado) REFERENCES EMPLEADO(rut),FOREIGN KEY (num_Relacion) REFERENCES RELACION(codRelacion),FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo));")
+    miCursor.execute("CREATE TABLE IF NOT EXISTS CARGA_FAMILIAR (codCarga NUMBER PRIMARY KEY,NombresApellidos VARCHAR2(30),num_Empleado NUMBER,num_Relacion NUMBER,num_Sexo NUMBER,FOREIGN KEY (num_Empleado) REFERENCES EMPLEADO(rut),FOREIGN KEY (num_Relacion) REFERENCES RELACION(codRelacion),FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS RELACION (codRelacion NUMBER PRIMARY KEY,Nombre VARCHAR2(20));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS CONTACTO_EMERGENCIA (codContacto NUMBER PRIMARY KEY,NombreApellido VARCHAR2(30),num_Relacion NUMBER,num_Sexo NUMBER,num_Empleado NUMBER,contacto VARCHAR2(30),FOREIGN KEY (num_Relacion) REFERENCES RELACION(codRelacion),FOREIGN KEY (num_Sexo) REFERENCES SEXO(codSexo),FOREIGN KEY (num_Empleado) REFERENCES EMPLEADO(rut));")
     miCursor.execute("CREATE TABLE IF NOT EXISTS CREDENCIAL (codCredencial NUMBER PRIMARY KEY,IDENT NUMBER,Usuario VARCHAR2(20),Clave VARCHAR2(70));")

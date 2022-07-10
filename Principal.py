@@ -4,6 +4,13 @@ import sitioRecursosHumanos
 import sitioEmpleado
 import sitioJefe
 import sitioAdministrador
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
+
+
 
 Utilidades.limpiarConsola()
 

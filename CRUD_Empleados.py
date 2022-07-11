@@ -2,10 +2,14 @@ import sql_conn
 import CRUD_Cargo
 import CRUD_Sexo
 import sitioEmpleado
-import CRUD_Empleados
 import CRUD_ContactoEmergencia
 import CRUD_CargaFamiliar
 import CRUD_Credenciales
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 strPluralMin = "Empleados"
 strSingularMin = "Empleado"
@@ -124,16 +128,16 @@ def Remover(): # Eliminar un registro. Pide PK
 # Usos
 
 def ModificarDatosPersonales(rut):
-    CRUD_Empleados.Obtener(rut)
+    Obtener(rut)
     # obtener datos antiguos y copiarlos
-    sql_conn.miCursor.execute("SELECT * FROM {};".format(CRUD_Empleados.strNombreTabla))
+    sql_conn.miCursor.execute("SELECT * FROM {};".format(strNombreTabla))
     datos = sql_conn.miCursor.fetchall()
     for item in datos:
         Nombre = input("Ingrese su nuevo Nombre: (Actual: {})".format(item[1]))
         Sexo = int(input("Ingrese su nuevo Sexo: (Actual: {})".format(item[2])))
         Direccion = input("Ingrese su nueva Direccion: (Actual: {})".format(item[3]))
         Telefono = input("Ingrese su nuevo numero de Telefono: (Actual: {})".format(item[4]))
-        CRUD_Empleados.Modificar(rut, Nombre, Sexo, Direccion, Telefono, item[5], item[6])
+        Modificar(rut, Nombre, Sexo, Direccion, Telefono, item[5], item[6])
 
 def ModificarContactoDeEmergencia(rut):
     CRUD_ContactoEmergencia.Obtener(rut)

@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 import sql_conn
 import Utilidades
@@ -8,6 +7,10 @@ import CRUD_Departamento
 import CRUD_Cargo
 import CRUD_Sexo
 import CRUD_Relacion
+# Cambia el directorio de trabajo
+#   = current file path
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 # 29/06/2022 03:36 PM. Funciona.
 

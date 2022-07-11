@@ -2,6 +2,11 @@ import sql_conn
 import CRUD_Empleados
 import CRUD_Relacion
 import CRUD_Sexo
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 strPluralMin = "Cargas Camiliares"
 strSingularMin = "Carga Familiar"
@@ -58,7 +63,7 @@ def Obtener(PK=None):
 #   U = Actualizar()
 #   D = Remover
 
-def Crear(num_Empleado): # Agrega un registro. Pide los datos
+def Crear(num_Empleado=None): # Agrega un registro. Pide los datos
     NombresApellidos = input("Ingrese el nombre de la Carga Familiar: ")
     CRUD_Empleados.Obtener()
     if (num_Empleado == None):

@@ -1,5 +1,10 @@
 import CRUD_Empleados
 import Utilidades
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 
 

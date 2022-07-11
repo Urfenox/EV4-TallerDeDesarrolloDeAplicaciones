@@ -5,6 +5,10 @@ import random
 import string
 import sql_conn
 import Utilidades
+# Cambia el directorio de trabajo
+#   = current file path
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 os.system("title myEmployeerArray")
 

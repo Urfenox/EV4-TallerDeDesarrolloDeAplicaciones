@@ -13,6 +13,11 @@ Es importante que ninguna otra variable haga lo mismo que lo que se hace aqui.
 
 #'
 import sqlite3
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 # Crea la conexion a la base de datos
 def abrirConn():

@@ -8,6 +8,11 @@ import CRUD_Departamento
 import CRUD_CargaFamiliar
 import CRUD_ContactoEmergencia
 import Utilidades
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 
 

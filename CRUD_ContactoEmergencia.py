@@ -2,6 +2,11 @@ import sql_conn
 import CRUD_Sexo
 import CRUD_Relacion
 import CRUD_Empleados
+# Cambia el directorio de trabajo
+#   = current file path
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
 
 strPluralMin = "Contactos de Emergencias"
 strSingularMin = "Contacto de Emergencia"
